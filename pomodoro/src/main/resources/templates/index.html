@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro Timer Online - Pomofocus</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/index/headerStyle.css}" />
+    <link rel="stylesheet" th:href="@{/css/index/bodyStyle.css}" />
+    <link rel="stylesheet" th:href="@{/css/index/footerStyle.css}" />
+    <link
+      rel="shortcut icon"
+      th:href="@{/images/favicon.ico}"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <main th:class="main">
+      <header th:class="header">
+        <div th:class="header__first">
+          <div th:class="header__first_logo">
+            <div th:class="header_logo">
+              <img th:class="logo" th:src="@{/images/icon-white2.png}" alt="" />
+            </div>
+            <div th:class="content"><h3>Pomofocus</h3></div>
+          </div>
+          <div th:class="header__first_button">
+            <button th:class="btn">
+              <img th:src="@{./images/report-icon.png}" />
+              <span>Report</span>
+            </button>
+            <button th:class="btn" th:id="btn__setting">
+              <img th:src="@{./images/setting-icon.png}" />
+              <span>Setting</span>
+            </button>
+            <button th:class="btn">
+              <img th:src="@{./images/user-icon.png}" />
+              <span>Login</span>
+            </button>
+          </div>
+        </div>
+        <div th:class="space__header"></div>
+        <div th:class="header__second">
+          <div th:class="first">
+            <div th:class="list__button" style="cursor: default">
+              <button th:class="btn__pomodoro">Pomodoro</button>
+              <button th:class="btn__short--break">Short Break</button>
+              <button th:class="btn__long--break">Long Break</button>
+            </div>
+            <div th:class="time">25:00</div>
+            <button th:class="btn__start">START</button>
+          </div>
+          <div th:class="second">
+            <span style="opacity: 0.6; margin-bottom: 6px; cursor: pointer"
+              >#0</span
+            >
+            <p style="font-size: 18px">Time to focus!</p>
+          </div>
+          <div th:class="third">
+            <div th:class="task__list">
+              <div th:class="title" style="font-weight: bold">Tasks</div>
+              <div th:class="threedots">
+                <img
+                  th:src="@{./images/threedots-icon.png}"
+                  alt=""
+                  style="width: 16px"
+                />
+                <div style="display: none" id="task__action">
+                  <ul th:class="dropdown">
+                    <li>
+                      <img th:src="@{./images/delete-icon.png}" alt="" />
+                      <span>Clear finished tasks</span>
+                    </li>
+                    <li>
+                      <img th:src="@{./images/clear-icon.png}" alt="" />
+                      <span>Clear act pomodoros</span>
+                    </li>
+                    <li>
+                      <img th:src="@{./images/save-icon.png}" alt="" />
+                      <span>Save as routine</span>
+                    </li>
+                    <li>
+                      <img th:src="@{./images/plus-icon.png}" alt="" />
+                      <span>Add from routines</span>
+                    </li>
+                    <li>
+                      <img th:src="@{./images/integration-icon.png}" alt="" />
+                      <span>Import from Todoist</span>
+                      <img th:src="@{./images/lock-icon.png}" alt="" />
+                    </li>
+                    <li>
+                      <img th:src="@{./images/clear-icon.png}" alt="" />
+                      <span>Clear all tasks</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div th:class="space__task"></div>
+            <div th:class="add__task">
+              <img
+                th:src="@{./images/plus-circle-icon.png}"
+                alt=""
+                style="width: 18px; margin-right: 8px"
+              />
+              <span style="color: white; font-weight: bold">Add Task</span>
+            </div>
+          </div>
+        </div>
+
+        <div th:id="header__setting">
+          <div th:class="setting">
+            <div th:class="setting__header">
+              <span
+                style="
+                  font-weight: bold;
+                  color: var(--text-color-7);
+                  opacity: 0.7;
+                "
+                >Setting</span
+              >
+              <img
+                th:src="@{./images/close-icon.png}"
+                alt=""
+                style="opacity: 0.7; cursor: pointer"
+                th:class="close__setting"
+              />
+            </div>
+            <div th:class="setting__details">
+              <div th:class="setting__details_timer">
+                <div th:class="title_setting">
+                  <img th:src="@{./images/clock-icon.png}" alt="" />
+                  TIMER
+                </div>
+                <div th:class="timer--details">
+                  <div th:class="text">Time (minutes)</div>
+                  <ul th:class="set_time">
+                    <li>
+                      <span>Pomodoro</span> <input type="number" value="25" />
+                    </li>
+                    <li>
+                      <span>Short Break</span> <input type="number" value="5" />
+                    </li>
+                    <li>
+                      <span>Long Break</span> <input type="number" value="15" />
+                    </li>
+                  </ul>
+                  <ul th:class="time_toggle">
+                    <li>
+                      <span>Auto Start Breaks</span>
+                      <div th:class="time_toggle--btn" th:id="auto__break">
+                        <div th:class="btn__switch"></div>
+                      </div>
+                    </li>
+                    <li>
+                      <span>Auto Start Pomodoros</span>
+                      <div th:class="time_toggle--btn" th:id="auto__pomodoro">
+                        <div th:class="btn__switch"></div>
+                      </div>
+                    </li>
+                    <li>
+                      <span>Long Break Interval</span>
+                      <input type="number" value="4" />
+                    </li>
+                  </ul>
+                </div>
+                <div th:class="setting__space"></div>
+              </div>
+              <div th:class="setting__details_task">
+                <div th:class="title_setting">
+                  <img th:src="@{./images/check-icon.png}" alt="" />
+                  TASK
+                </div>
+                <div th:class="task--setting">
+                  <div style="color: var(--text-color-6); font-weight: bold">
+                    Auto Switch Tasks
+                  </div>
+                  <div th:class="time_toggle--btn" th:id="auto__switch">
+                    <div th:class="btn__switch"></div>
+                  </div>
+                </div>
+              </div>
+              <div th:class="setting__details_sound">
+                <div th:class="title_setting">
+                  <img th:src="@{./images/sound-icon.png}" alt="" />
+                  SOUND
+                </div>
+                <ul th:class="setting__details_sound_list">
+                  <li>
+                    <div
+                      style="
+                        color: var(--text-color-6);
+                        font-weight: bold;
+                        transform: translateY(10px);
+                      "
+                    >
+                      Alarm Sound
+                    </div>
+                    <div th:class="list-sound-setting-1">
+                      <div th:class="list-sound">
+                        <div th:id="default_sound">
+                          Kitchen
+                          <img
+                            th:src="@{./images/down-arrow-icon.png}"
+                            alt=""
+                            style="width: 12px"
+                          />
+                        </div>
+                        <ul th:class="list--sound">
+                          <li th:id="bell-sound">Bell</li>
+                          <li th:id="bird-sound">Bird</li>
+                          <li th:id="digital-sound">Digital</li>
+                          <li th:id="kitchen-sound">Kitchen</li>
+                          <li th:id="wood-sound">Wood</li>
+                        </ul>
+                      </div>
+                      <div th:class="change-sound">
+                        <span id="sound_number"></span>
+                        <input type="range" id="sound_range" value="50" />
+                      </div>
+                      <div th:class="repeat-sound">
+                        <span>Repeat</span>
+                        <input type="number" value="1" />
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div
+                      style="
+                        color: var(--text-color-6);
+                        font-weight: bold;
+                        transform: translateY(10px);
+                      "
+                    >
+                      Ticking Sound
+                    </div>
+                    <div th:class="list-sound-setting-2">
+                      <div th:class="ticking-sound" style="width: 130px">
+                        <div th:id="default_ticking">
+                          None
+                          <img
+                            th:src="@{./images/down-arrow-icon.png}"
+                            alt=""
+                            style="width: 12px"
+                          />
+                        </div>
+                        <ul th:class="ticking-list">
+                          <li th:id="ticking-none">None</li>
+                          <li th:id="ticking-fast">Ticking Fast</li>
+                          <li th:id="ticking-slow">Ticking Slow</li>
+                          <li th:id="ticking-w-noise">White Noise</li>
+                          <li th:id="ticking-b-noise">Brown Noise</li>
+                        </ul>
+                      </div>
+                      <div th:class="change-sound">
+                        <span id="ticking_number"></span>
+                        <input type="range" id="ticking_range" value="50" />
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div th:class="setting__details_theme">
+                <div th:class="title_setting">
+                  <img th:src="@{./images/theme-icon.png}" alt="" />
+                  THEME
+                </div>
+                <ul th:class="list__theme_setting">
+                  <li th:class="color-theme">
+                    <span>Color Themes</span>
+                    <div th:class="list-change-color">
+                      <div
+                        th:class="chose-color"
+                        style="background-color: rgb(186, 73, 73)"
+                      ></div>
+                      <div
+                        th:class="chose-color"
+                        style="background-color: rgb(56, 133, 138)"
+                      ></div>
+                      <div
+                        th:class="chose-color"
+                        style="background-color: rgb(57, 112, 151)"
+                      ></div>
+                    </div>
+                  </li>
+                  <li th:class="hour-format">
+                    <span>Hour format</span>
+                    <div style="width: 130px" th:class="setting-hour">
+                      <div th:class="default--hour">
+                        24-hour
+                        <img
+                          th:src="@{./images/down-arrow-icon.png}"
+                          alt=""
+                          style="width: 12px"
+                        />
+                      </div>
+                      <ul th:class="hour--list">
+                        <li>24-hour</li>
+                        <li>12-hour</li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li th:class="dark-mode">
+                    <span>Dark Mode when running</span>
+                    <div th:class="time_toggle--btn" th:id="dark__mode">
+                      <div th:class="btn__switch"></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div th:class="setting__details_other">
+                <div th:class="title_setting">
+                  <img th:src="@{./images/config-icon.png}" alt="" />
+                  OTHERS
+                </div>
+                <ul th:class="list_other_setting">
+                  <li th:class="noti-setting" style="align-items: center">
+                    <span
+                      style="
+                        color: var(--text-color-6);
+                        font-weight: bold;
+                        align-items: center;
+                      "
+                      >Notification</span
+                    >
+                    <div th:class="chose-noti">
+                      <div style="width: 80px" th:class="default--noti">
+                        Every
+                        <img
+                          th:src="@{./images/down-arrow-icon.png}"
+                          alt=""
+                          style="width: 12px"
+                        />
+                        <ul style="display: none" th:class="list--noti">
+                          <li>Every</li>
+                          <li>Last</li>
+                        </ul>
+                      </div>
+                      <input type="number" value="5" />
+                      <span>min</span>
+                    </div>
+                  </li>
+                  <li
+                    th:class="small-window"
+                    style="align-items: center; cursor: pointer"
+                  >
+                    <span style="color: var(--text-color-6); font-weight: bold"
+                      >Small Window</span
+                    >
+                    <div style="font-size: 15px">
+                      Launch
+                      <img
+                        th:src="@{./images/external-link-icon.svg}"
+                        alt=""
+                        style="width: 12px"
+                      />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div th:class="setting__details_integration">
+                <div th:class="title_setting">
+                  <img th:src="@{./images/integration-icon.png}" alt="" />
+                  INTEGRATION
+                </div>
+                <div th:class="integration">
+                  <div
+                    th:class="information"
+                    style="color: var(--text-color-6); font-weight: bold"
+                  >
+                    TodoList
+                    <img
+                      th:src="@{./images/information-icon.png}"
+                      alt=""
+                      style="width: 14px; transform: translateY(2px)"
+                    />
+                  </div>
+                  <div
+                    th:class="setting-connect"
+                    style="width: 104px; font-size: 15px; cursor: pointer"
+                  >
+                    Connect
+                    <img
+                      th:src="@{./images/lock-icon.png}"
+                      alt=""
+                      style="width: 12px"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div th:class="setting__footer">
+              <button>OK</button>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div th:class="body" style="display: none">
+        <div th:class="body__title">
+          <h1>An online Pomodoro Timer to boost your productivity</h1>
+        </div>
+        <div th:class="body__question">
+          <div th:class="body__question_first">
+            <div th:class="question__title">What is Pomofocus?</div>
+            <div th:class="question__space"></div>
+            <div th:class="answer">
+              Pomofocus is a customizable pomodoro timer that works on desktop &
+              mobile browser. The aim of this app is to help you focus on any
+              task you are working on, such as study, writing, or coding. This
+              app is inspired by
+              <strong
+                ><a
+                  th:href="@{https://francescocirillo.com/products/the-pomodoro-technique}"
+                  target="_blank"
+                  style="color: var(--text-color-2)"
+                  >Pomodoro Technique</a
+                ></strong
+              >
+              which is a time management method developed by Francesco Cirillo.
+            </div>
+          </div>
+          <div th:class="body__question_second">
+            <div th:class="question__title">What is Pomodoro Technique?</div>
+            <div th:class="question__space"></div>
+            <div th:class="answer">
+              The Pomodoro Technique is created by Francesco Cirillo for a more
+              productive way to work and study. The technique uses a timer to
+              break down work into intervals, traditionally 25 minutes in
+              length, separated by short breaks. Each interval is known as a
+              pomodoro, from the Italian word for 'tomato', after the
+              tomato-shaped kitchen timer that Cirillo used as a university
+              student. -
+              <strong
+                ><a
+                  th:href="@{https://en.wikipedia.org/wiki/Pomodoro_Technique}"
+                  target="_blank"
+                  style="color: var(--text-color-2)"
+                  >Wikipedia</a
+                ></strong
+              >
+            </div>
+          </div>
+          <div th:class="body__question_third">
+            <div th:class="question__title">How to use the Pomodoro Timer?</div>
+            <div th:class="question__space"></div>
+            <ul th:class="list__answer">
+              <li>
+                1. <strong>Add tasks</strong> <span>to work on today</span>
+              </li>
+              <li>
+                2. <strong>Set estimate pomodoros</strong>
+                <span>(1 = 25min of work) for each tasks</span>
+              </li>
+              <li>3. <strong>Select a task</strong> <span>to work on</span></li>
+              <li>
+                4. <strong>Start timer</strong>
+                <span>and focus on the task for 25 minutes</span>
+              </li>
+              <li>
+                5. <strong>Take a break</strong>
+                <span>for 5 minutes when the alarm ring</span>
+              </li>
+              <li>
+                6. <strong>Iterate</strong>
+                <span>3-5 until you finish the tasks</span>
+              </li>
+            </ul>
+          </div>
+          <div th:class="body__question_fouth">
+            <div th:class="question__title">Feature</div>
+            <div th:class="question__space"></div>
+            <ul th:class="list__feature">
+              <li>
+                <strong>Responsive design</strong>
+                <span>that works with desktop and mobile</span>
+              </li>
+              <li>
+                <strong>Color transition</strong>
+                <span>to switch moods between work time and rest time</span>
+              </li>
+              <li>
+                <strong>Audio notification</strong>
+                <span>at the end of a timer period</span>
+              </li>
+              <li>
+                <strong>Customizable timer</strong>
+                <span>intervals to suit your preference</span>
+              </li>
+            </ul>
+          </div>
+          <div th:class="body__question_fifth">
+            <div th:class="question__title">Download App</div>
+            <div th:class="question__space"></div>
+            <ul th:class="list__feature">
+              <li>
+                <strong>For MacOS</strong>
+                <span>(zip file) *Right click the icon to open</span>
+              </li>
+              <li>
+                <strong>For Window </strong>
+                <span>zip file</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer th:class="footer" style="display: none">
+        <div th:class="footer__sitmap" style="margin-bottom: 14px">
+          <ul th:class="footer__navbar">
+            <li th:class="footer__navbar_list">
+              <a th:href="@{#}">HOME</a>
+            </li>
+            <li th:class="footer__navbar_list">
+              <a th:href="@{./component/sitmap/pravicy.html}" target="_blank"
+                >PRAVICY</a
+              >
+            </li>
+            <li th:class="footer__navbar_list">
+              <a th:href="@{#}">CONTACT</a>
+            </li>
+            <li th:class="footer__navbar_list">
+              <a th:href="@{./component/sitmap/simplePage.html}" target="_blank"
+                >SIMPLE PAGE</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div th:class="footer__snslink">
+          <img th:src="@{./images/facebook-icon.png}" alt="facebook" />
+          <img th:src="@{./images/twitter-icon.png}" alt="twitter" />
+          <img
+            th:src="@{./images/stripe-climate-badge-icon.png}"
+            alt="strip climate"
+          />
+        </div>
+        <div th:class="footer__content">
+          Made by
+          <strong style="color: var(--text-color-2); opacity: 0.7"
+            >N13_WEB</strong
+          >
+        </div>
+        <div th:class="footer__about">
+          ©Pomofocus 2023. All Rights Reserved.
+        </div>
+      </footer>
+    </main>
+    <script th:src="@{/js/script.js}"></script>
+  </body>
+</html>

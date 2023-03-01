@@ -1,0 +1,69 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --bgr-color-1: rgb(186, 73, 73);
+  --bgr-color-2: rgba(255, 255, 255, 0.1);
+  --bgr-color-3: rgb(239, 239, 239);
+  --bgr-color-4: rgba(0, 0, 0, 0.4);
+  --bgr-btn-1: rgba(255, 255, 255, 0.2);
+  --bgr-btn-2: rgba(0, 0, 0, 0.15);
+  --bgr-btn-3: rgb(204, 204, 204);
+  --bgr-space: rgba(0, 0, 0, 0.1);
+  --text-color-1: hsl(357, 50%, 22%);
+  --text-color-2: hsl(2, 66%, 58%);
+  --text-color-3: hsl(357, 12%, 42%);
+  --text-color-4: rgb(34, 34, 34);
+  --text-color-5: rgb(187, 187, 187);
+  --text-color-6: rgb(85, 85, 85);
+  --text-color-7: rgb(102, 102, 102);
+  --text-color-8: rgb(120, 120, 120);
+  --list-style-color: hsl(357, 74%, 67%);
+}
+
+a {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+.active {
+  display: block !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+input:focus {
+  outline: none;
+}
+
+.switch--btn {
+  left: 50% !important;
+}
+
+.auto--btn {
+  background-color: rgba(132, 199, 51, 0.8) !important;
+}
+
+.red {
+  background-color: var(--bgr-btn-1) !important;
+}
+
+.green {
+  background-color: rgb(56, 133, 138) !important;
+}
+
+.blue {
+  background-color: rgb(57, 112, 151) !important;
+}
